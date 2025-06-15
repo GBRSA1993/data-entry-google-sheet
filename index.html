@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Data Entry Form</title>
+</head>
+<body>
+  <h1>Submit Your Data</h1>
+  <form id="dataForm">
+    <label>ID: <input name="ID" required></label><br>
+    <label>Score: <input name="Score" required></label><br>
+    <label>FalseStart: <input name="FalseStart" required></label><br>
+    <label>Remark: <input name="Remark"></label><br>
+    <button type="submit">Send</button>
+  </form>
+
+  <script>
+    const form      = document.getElementById('dataForm');
+    const scriptURL = 'https://script.google.com/macros/s/AKfycby1d4IYoPcW2DWKpijEfua07oi24GI8CCTzwBo6tGEv78n4MBf3sgxJGc6PEslFqsxq0Q/exec';
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+        .then(r => r.json())
+        .then(() => alert('Submission successful!'))
+        .catch(err => console.error('Error:', err));
+    });
+  </script>
+</body>
+</html>
