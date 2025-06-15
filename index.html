@@ -5,7 +5,7 @@
   <title>Data Entry Form</title>
 </head>
 <body>
-  <h1>Submit Your Data</h1>
+  <h1>Submit Your Jump Rope Scores</h1>
   <form id="dataForm">
     <label>ID: <input name="ID" required></label><br>
     <label>Score: <input name="Score" required></label><br>
@@ -15,15 +15,15 @@
   </form>
 
   <script>
-    const form      = document.getElementById('dataForm');
+    const form = document.getElementById('dataForm');
     const scriptURL = 'https://script.google.com/macros/s/AKfycby1d4IYoPcW2DWKpijEfua07oi24GI8CCTzwBo6tGEv78n4MBf3sgxJGc6PEslFqsxq0Q/exec';
 
     form.addEventListener('submit', e => {
       e.preventDefault();
       fetch(scriptURL, { method: 'POST', body: new FormData(form) })
-        .then(r => r.json())
-        .then(() => alert('Submission successful!'))
-        .catch(err => console.error('Error:', err));
+        .then(response => response.json())
+        .then(data => alert('Submission successful!'))
+        .catch(error => console.error('Error!', error));
     });
   </script>
 </body>
